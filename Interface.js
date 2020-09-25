@@ -112,4 +112,6 @@ class Person implements Greetable
 {
     name?:string;
 
-
+interface Greetable extends Named
+{
+   <b> greet?(phrase:string):void;</b>

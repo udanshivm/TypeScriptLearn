@@ -170,4 +170,19 @@
 
     
   ### Function Overload
+                             function add(a:number,b:number):number
+                             function add(a:number,b:string):string
+                             function add(a:string,b:number):string
+                             function add(a:combinavble,b:combinavble)
+                             {
+                                 if(typeof a == "string" || typeof b =="string")
+                                 {
+                                     return a.toString() + b.toString();
+                                 }
+
+                                 return a+b;
+                             }
+
+                             console.log(add("3",5));
+  
   

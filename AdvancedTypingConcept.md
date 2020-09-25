@@ -158,5 +158,16 @@
                                movingAnimal({type:'bird',flyingSpeed:40});
 
   ### Type casting
+                              // const getUserInput=<HTMLInputElement>document.getElementById("user-input")!;
+                              // const getUserInput=document.getElementById('user-input')! as HTMLInputElement;
+
+                              const getUserInput=document.getElementById('user-input');
+                              if(getUserInput)
+                              {
+                                  (getUserInput as HTMLInputElement).value='test';
+
+                              }
+
+    
   ### Function Overload
   

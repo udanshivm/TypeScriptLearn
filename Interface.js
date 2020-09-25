@@ -1,4 +1,6 @@
 # What is an interface -> Describe the strucutre of the object -> We can descripe how the object should look like
+Forces class to have an certain strucutre and idea of how object look like 
+
 Interface can't have a initalizer
 
 interface Person

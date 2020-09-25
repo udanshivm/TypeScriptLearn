@@ -1,18 +1,29 @@
+//Learn about classes, inheritance, abstaract class, getter and setter proprties and methods, Abstract constructor singletone method etc.
 
-class Department{
+
+ abstract class Department{
+
+    static fiscalyear=2020;
     //  name:string;
     // age:number;
    protected employees:string[]=[];
 
-    constructor(private Id:string,public name:string){
+    constructor(protected Id:string,public name:string){
         // this.name=n;
         // this.age=a;
+    }
+
+    static createEmployee(name:string)
+    {
+        return {name:name};
     }
 
  getDepartmentName()
  {
      return this.name;
  }
+
+ abstract describe(this:Department):void;
 
  addEmployee(empname:string)
  {
@@ -37,6 +48,11 @@ class ITDepartment extends Department
         this.admins=admins;
     }
 
+    describe()
+    {
+
+    }
+
     addAdmin(text:string)
     {
         this.admins.push(text);
@@ -57,11 +73,50 @@ class ITDepartment extends Department
 
 class AccountingDepartment extends Department
 {
+    private lastrport:string;
+    private static instance:AccountingDepartment;
+
     reports:string[];
-    constructor(id:string,report:string[])
+    private constructor(id:string,reports:string[])
     {
         super(id,"Accounting");
-        this.reports=report;
+        this.reports=reports;
+        this.lastrport=reports[0];
+    }
+    get mostRecentReport()
+    {
+        if(this.lastrport)
+        {
+            return this.lastrport;
+        }
+         throw new Error("No report Found");    
+    }
+
+    set mostRecentReport(value:string)
+    {
+        if(!value)
+        {
+            throw new Error(" Please pass in the valid value");
+            
+        }
+        this.addReports(value);
+    }
+
+
+
+    static getInstance()
+    {
+        if(AccountingDepartment.instance)
+        {
+            return this.instance
+        }
+        this.instance=new AccountingDepartment('d2',[]);
+
+    }
+
+    describe()
+    {
+        console.log(`Accounting Department : ${this.Id}`)
     }
 
     addEmployee(name:string)
@@ -76,6 +131,7 @@ class AccountingDepartment extends Department
     addReports(repo:string)
     {
         this.reports.push(repo);
+        this.lastrport=repo;
     }
 
     getReport()
@@ -84,8 +140,11 @@ class AccountingDepartment extends Department
     }
 }
 
+console.log(Department.createEmployee("newemp"));
+console.log(Department.fiscalyear);
 
 var it=new ITDepartment("IT",["max"]);
+it.describe();
 it.getItDepart();
 it.addEmployee("mallikarjun");
 it.addEmployee("Preeti");
@@ -93,36 +152,19 @@ it.addAdmin("keadr");
 it.printEmpInformation();       
 console.log(it);
 
-var acc=new AccountingDepartment("accDept",["Sharereport","newerpor"]);
-var emplist=["devraj","sumit","Max","max"];
-emplist.forEach(element => {
-    acc.addEmployee(element);
-});
+// var acc=new AccountingDepartment("accDept",["test"]);
+const acc=AccountingDepartment.getInstance();
+const acc1=AccountingDepartment.getInstance();
+console.log(acc,acc1);
 
-console.log(acc); 
+// console.log(acc.mostRecentReport);
+// acc.mostRecentReport='Year end report';
+// var emplist=["devraj","sumit","Max","max"];
+// emplist.forEach(element => {
+//     acc.addEmployee(element);
+// });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// console.log(acc); 
 
 
 
